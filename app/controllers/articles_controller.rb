@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-    before_action :article_get, only: [:edit, :update, :show, :destory]
+    before_action :article_get, only: [:edit, :update, :show,:destroy]
     def index
         @articles=Article.all
     end
