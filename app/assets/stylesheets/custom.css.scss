@@ -38,7 +38,13 @@ $navbar-default-bg: black;
     font-size: 1.7em;
     background-color: black;
 }
-
+.article-actions{
+    border-top: 1px solid #eaeaea;
+    padding-top:10px;
+}
+.description{
+    margin-top: 0;
+}
 footer {
     position: fixed;
     left: 0;
