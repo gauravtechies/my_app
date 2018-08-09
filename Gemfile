@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
+#bcrypt method for doing encryting the password
+gem 'bcrypt', '~>3.1.7'
 # Bootstrap added 
 gem 'bootstrap-sass', '~> 3.3.5'
 # Use SCSS for stylesheets
