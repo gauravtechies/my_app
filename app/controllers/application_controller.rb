@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     !!current_user #convert the value from current user in boolean
   end
   def require_user
-    if !logged_in?
+    if !logged_in?  
       flash[:danger] = "You must be logged in to perform that action"
       redirect_to root_path
     end
