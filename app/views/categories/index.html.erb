@@ -1,8 +1,6 @@
-<h1 align="center">Listing of categories</h1>
-<div align="center">
-    <%=will_paginate %>
-</div>
-    <%= render 'category', obj: @categories %>
-<div align="center">
-    <%= will_paginate %>
-</div>
+<h1 align="center">Listing All Categories</h1>
+    <div align="center">
+        <%= will_paginate %>
+         <%=render 'category',obj:@categories    %>
+        <%= will_paginate %>
+    </div>

@@ -1,7 +1,7 @@
 require 'test_helper'
 class ListCategoriesTest < ActionDispatch::IntegrationTest
     def setup
-        @category = Category.create(name: "PC")
+        @category = Category.create(name: "ramk")
         @category2 = Category.create(name: "programming")
     end
 
