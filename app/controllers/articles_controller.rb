@@ -25,6 +25,7 @@ class ArticlesController < ApplicationController
     end
 
     def update
+        @article.user = current_user
         if @article.update(article_params)
             flash[:success]="Articles updated....."
             redirect_to article_path(@article)
@@ -49,7 +50,7 @@ class ArticlesController < ApplicationController
         @article=Article.find(params[:id]) 
     end
     def article_params
-        params.require(:article).permit(:title,:description, category_ids: [])
+        params.require(:article).permit(:title,:description,:user_id, category_ids: [])
     end
 
     def require_same_user
