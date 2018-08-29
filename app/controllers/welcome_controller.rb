@@ -4,6 +4,5 @@ class WelcomeController < ApplicationController
     end
     
     def about
-        redirect_to "https://youtube.com" 
     end
 end
