@@ -9,6 +9,7 @@
                         <li class="article-title">
                         <%=link_to user.username, user_path(user) %>
                         </li>
+                        <li> <small align="center"><%= user.email %></small></li>
                         <li><small>
                         <%=pluralize(user.articles.count, "article") %>
                         </small></li>
