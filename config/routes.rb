@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-  resources :articles
+  resources :articles do 
+    resources :comments
+  end
    root 'welcome#home'
    get 'about'=>'welcome#about'
    get 'signup'=>'users#new'

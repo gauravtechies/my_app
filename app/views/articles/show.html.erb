@@ -3,35 +3,90 @@
 </h2>
 
 <div class="well col-xs-8 col-xs-offset-2">
- <% if @article.user %>
+    <% if @article.user %>
     <ul class="listing">
         <div class="row center">
             <div class="col-md-4 col-md-offset-4">
                 <li>Created by:</li>
-                <li><%= link_to gravatar_for(@article.user), user_path(@article.user) %></li>
-                <li class="article-title">
-                <%= link_to @article.user.username, user_path(@article.user) %>
+                <li>
+                    <%= link_to gravatar_for(@article.user), user_path(@article.user) %>
                 </li>
-                <li><small><%= pluralize(@article.user.articles.count, "article") if @article.user.articles %>
-                </small></li>
+                <li class="article-title">
+                    <%= link_to @article.user.username, user_path(@article.user) %>
+                </li>
+                <li><small>
+                        <%= pluralize(@article.user.articles.count, "article") if @article.user.articles %>
+                    </small></li>
             </div>
         </div>
     </ul>
 
-<% end %>
+    <% end %>
     <h4 class="center description">
         <strong>Description:</strong>
     </h4>
     <hr>
     <%= @article.description %>
-        <div class="article-actions">
-            <% if @article.categories.any? %>
-              <p>Categories: <%=render @article.categories %></p>
-            <% end %>
-            <% if logged_in? && (current_user==@article.user ||   current_user.admin?) %> 
-                <%=link_to "Edit article",edit_article_path(@article), class:"btn btn-xs btn-primary" %>
-                <%=link_to "Delete",article_path(@article), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-xs btn-danger" %></td>
-                <%=link_to "View all articles ",articles_path, class:"btn btn-xs btn-success"%>
-            <% end %>
+    <div class="article-actions">
+        <% if @article.categories.any? %>
+        <p>Categories:
+            <%=render @article.categories %>
+        </p>
+        <% end %>
+        <% if logged_in? && (current_user==@article.user ||   current_user.admin?) %>
+        <%=link_to "Edit article",edit_article_path(@article), class:"btn btn-xs btn-primary" %>
+        <%=link_to "Delete",article_path(@article), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-xs btn-danger" %>
+        </td>
+        <%=link_to "View all articles ",articles_path, class:"btn btn-xs btn-success"%>
+        <% end %>
+    </div>
+    <br />
+     
+   
+     
+      <%= form_for [@article, @comment ], :html => {class: "form-horizontal", role: "form"} do |f| %>
+       
+        <div class='form-group'>
+            <div class='control-label col-md-2'>
+                <%= f.label :body, 'New Comment' %>
+            </div>
+            <div class='col-md-10'>
+                <%= f.text_area :body, rows: 3, class: 'form-control', placeholder: 'Your comment' %>
+            </div>
         </div>
-</div>
+        <div class='form-group'>
+            <div class='col-md-offset-2 col-md-10'>
+                <%= f.submit "Add Comment", class: 'btn btn-primary btn-lg pull-right' %>
+            </div>
+        </div>
+        <% end %>
+
+
+          <div class='col-md-12'>
+            <header>
+                <h2>Comments</h2>
+            </header>
+          
+            <div class="col-md-10">
+                <% if @article.comments.any? %>
+                <% persisted_comments(@comments).each do |comment| %>
+                <div class="image pull-left">
+                    <%= link_to gravatar_for(@article.user),user_path(@article.user),class: 'image_comments', size:50 %>
+                </div>
+                <div class="comment-body">
+                    <%= comment.body %>
+                </div>
+                <div class="comment-time">
+                    <%= time_ago_in_words(comment.created_at) %>
+                    ago by
+                    <%= comment.user.username %>
+                </div>
+                <hr>
+                <% end %>
+                <% else %>
+                There are no comments to show.
+                <% end %>
+            </div>
+        </div>
+      
+    </div>
